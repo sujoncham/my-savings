@@ -9,7 +9,7 @@ const MessageAll = () => {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/message");
+                const response = await axios.get("https://amar-savings-loan.onrender.com/api/message");
                 setMessages(response.data);
             } catch (error) {
                 console.error("Error fetching messages:", error);
@@ -21,7 +21,7 @@ const MessageAll = () => {
 
     const handleRead = async (id) => {
         try {
-            await axios.put(`http://localhost:5000/api/message/${id}`, { status: "read" });
+            await axios.put(`https://amar-savings-loan.onrender.com/api/message/${id}`, { status: "read" });
             setMessages(
                 messages.map((message) =>
                     message._id === id ? { ...message, status: "read" } : message
