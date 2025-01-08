@@ -74,7 +74,7 @@ const Dashboard = () => {
                 className="block px-4 py-2 hover:bg-gray-700 rounded"
                 onClick={() => setIsSidebarOpen(false)}
               >
-                Expense Edit
+                Expense add & Edit
               </Link>
             </li>
             <li>

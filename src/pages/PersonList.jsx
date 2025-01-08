@@ -71,14 +71,18 @@ const PersonList = () => {
       <div className="flex justify-between items-center mb-5">
       <h1 className="text-2xl font-bold text-center">Person List</h1>
         <button onClick={() => setIsOpen(!isOpen)} disabled={persons.length >= 12}
-                className={persons.length >= 12 ? "bg-gray-500 text-white px-3 pl-3 py-1 rounded-md" : "bg-blue-500 text-white px-3 pl-3 py-1 rounded hover:bg-blue-600"} 
+          className={
+            persons.length >= 12 ?
+              "bg-red-500 text-white px-4 py-2 rounded cursor-not-allowed" :
+              "bg-blue-500 text-white px-3 pl-3 py-1 rounded hover:bg-blue-600"
+          } 
               >
                 Add
               </button>
       </div>
       <hr className="mb-5" />
                {/* Total Balance */}
-      <div className="bg-green-100 p-3 mb-5 mt-5 text-center rounded-md shadow-md">
+      <div className="bg-green-500 p-3 mb-5 mt-5 text-center rounded-md shadow-md">
         <h2 className="text-lg font-semibold">
           Total Balance: {loading ? "Calculating..." : `${totalBalance || 0} Taka`}
         </h2>

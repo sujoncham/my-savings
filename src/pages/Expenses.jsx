@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchExpenses } from "../redux/features/expensesSlice";
 
 const Expenses = () => {
-    const [expenses, setExpenses] = useState([]);
-    const totalExpense = expenses?.reduce((total, expen) => total + expen.expense, 0);
+    const dispatch = useDispatch();
+    const { expenses, loading, error } = useSelector((state) => state.expenses);
+    // console.log(expenses)
 
     useEffect(() => {
-        const fetchExpenses = async () => {
-            try {
-                const response = await axios.get("https://amar-savings-loan.onrender.com/api/expenses");
-                setExpenses(response.data.data.expenses);
-            } catch (error) {
-                console.error("There was an error fetching the expenses!", error);
-            }
-        };
-        fetchExpenses();
-    }, []);
+        
+            dispatch(fetchExpenses());
+    
+    }, [ dispatch]);
 
+    const totalExpense = expenses?.reduce((total, expen) => total + expen.expense, 0);
+
+    if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
     return (
         <div className="container mx-auto p-5">

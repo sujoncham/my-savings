@@ -40,19 +40,19 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center p-4">
         {/* Logo */}
         <div className="text-2xl font-bold">
-          <Link to="/">Savings App</Link>
+          <Link className="uppercase" to="/">my savings</Link>
         </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6">{menu}</nav>
         <div>
         {!isAuthenticated ? (<div className="flex space-x-4">
-        <Link key="signin" to="/signin" className="block hover:text-gray-200">
+        <Link key="signin" to="/signin" className="block hover:text-gray-200 bg-blue-700 px-4 py-2 rounded">
           Login
         </Link>
         
             </div> ):
-          <button onClick={handleLogout} className="block hover:text-gray-200">
+          <button onClick={handleLogout} className="block hover:text-gray-200 bg-blue-700 px-4 py-2 rounded">
           Logout
         </button>}
         </div>

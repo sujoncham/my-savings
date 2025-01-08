@@ -107,8 +107,13 @@ const Loan = () => {
         </div>
         <div className="">
         <button
-          onClick={()=>setLoanModalOpen(true)}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          onClick={() => setLoanModalOpen(true)}
+          disabled={currentTotalBalance === 0} // Disable only when loans.length is 0
+          className={
+            currentTotalBalance === 0
+              ? "bg-red-500 text-white px-4 py-2 rounded cursor-not-allowed" // Red and disabled styling
+              : "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" // Blue and enabled styling
+          }
         >
           Add Loan
         </button>
