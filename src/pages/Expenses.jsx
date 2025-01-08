@@ -34,7 +34,7 @@ const Expenses = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {expenses.map((expen, index) => (
+                    {expenses.length ? expenses.map((expen, index) => (
                         <tr key={expen._id} className="bg-gray-50">
                             <td className="border border-gray-300 px-4 py-2">
                                 {index +1}
@@ -48,7 +48,11 @@ const Expenses = () => {
                                 {expen.note }
                             </td>
                         </tr>
-                    ))}
+                    )) : (<tr className="bg-gray-50">
+                        
+                        <td className="border border-gray-300 px-4 py-2">No expense yet</td>
+                        
+                    </tr>)}
                 </tbody>
             </table>
             </div>

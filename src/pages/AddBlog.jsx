@@ -29,7 +29,7 @@ const AddBlog = () => {
     };
 
     return (
-        <div className="container mx-auto px-5 py-10 m-10">
+        <div className="container mx-auto px-5 py-10">
             <div className="mb-10 border-2 border-blue-500 p-5 rounded">
                 <h3 className="text-lg font-semibold mb-3">Add Blog</h3>
                 <input

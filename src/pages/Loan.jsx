@@ -123,7 +123,7 @@ const Loan = () => {
       {/* Add Loan Button */}
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {loans?.map((loan) => (
+        {loans.length ? loans?.map((loan) => (
           <div
             key={loan._id}
             className="bg-white p-4 shadow-md rounded-md border border-gray-200"
@@ -149,7 +149,10 @@ const Loan = () => {
               Show History
             </button>
           </div>
-        ))}
+        )) : (<div
+        className="bg-white p-4 shadow-md rounded-md border border-gray-200"
+        > <h1>No Loans Found</h1>
+        </div>)}
       </div>
 
       {loanModalOpen && (

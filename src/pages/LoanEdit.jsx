@@ -43,7 +43,7 @@ const LoanEdit = () => {
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-        {loans?.map((loan) => (
+        {loans.length ? loans?.map((loan) => (
           <div
             key={loan._id}
             className="bg-white p-4 shadow-md rounded-md border border-gray-200 flex justify-between items-center"
@@ -52,9 +52,6 @@ const LoanEdit = () => {
             <div className=''>
             <h2 className="text-lg font-semibold">{loan.name}</h2>
               <p>Total Loan: {loan.totalLoan} Taka</p>
-              {/* <p>Total Interest: {loan.totalInterest} Taka</p>
-              <p>Remaining Loan: {loan.remainingLoan} Taka</p>
-              <p>Remaining Interest: {loan.remainingInterest} Taka</p> */}
             </div>
             <button
               onClick={() => openModal(loan)}
@@ -64,7 +61,7 @@ const LoanEdit = () => {
             </button>
             
           </div>
-        ))}
+        )) : <div className="bg-white p-4 shadow-md rounded-md border border-gray-200">No loans found</div>}
       </div>
 
       {isModalOpen && (

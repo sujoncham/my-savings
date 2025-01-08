@@ -32,8 +32,8 @@ const AddTestimonial = () => {
         }
     };
     return (
-        <section className="bg-gray-100 py-16"> 
-        <div className="mt-16">
+      <section className="container mx-auto px-5 py-10">
+            <div className="mb-10 border-2 border-blue-500 p-5 rounded">
           <h3 className="text-xl font-bold mb-4">Add Your Testimonial</h3>
           <form onSubmit={handleAddTestimonial} className="bg-gray-100 p-6 rounded shadow">
             <div className="mb-4">
