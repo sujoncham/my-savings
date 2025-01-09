@@ -69,7 +69,7 @@ const PersonList = () => {
   return (
     <div className="container mx-auto p-5 mb-16">
       <div className="flex justify-between items-center mb-5">
-      <h1 className="text-2xl font-bold text-center">Person List</h1>
+      <h1 className="text-2xl font-bold text-center">12 Members Name List</h1>
         <button onClick={() => setIsOpen(!isOpen)} disabled={persons.length >= 12}
           className={
             persons.length >= 12 ?

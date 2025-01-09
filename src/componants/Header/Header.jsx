@@ -23,7 +23,7 @@ const Header = () => {
       Loan
     </Link>,
     <Link key="personList" to="/personList" className="block hover:text-gray-200">
-      Person List
+      Members List
     </Link>,
     <Link key="expense" to="/expense" className="block hover:text-gray-200">
       Expense

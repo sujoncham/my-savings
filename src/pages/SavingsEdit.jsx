@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPersons, updateSavings } from '../redux/features/personSlice';
+import axios from 'axios';
 
 const SavingsEdit = () => {
   const { persons, loading, error } = useSelector((state) => state.persons);
@@ -34,8 +35,18 @@ const SavingsEdit = () => {
     }
   };
 
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+
+  const handleDelete = async (id) => {
+    try {
+        await axios.delete(`https://amar-savings-loan.onrender.com/api/persons/${id}`);
+  
+    } catch (error) {
+        console.error("There was an error deleting the expense!", error);
+    }
+};
 
   return (
     <div>
@@ -56,7 +67,10 @@ const SavingsEdit = () => {
                   className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                 >
                   Edit
-                </button>
+              </button>
+              <button
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                onClick={() => handleDelete(person._id)}>del</button>
               </div>
             ))}
       </div>
