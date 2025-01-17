@@ -4,6 +4,7 @@ import personList from "../features/personSlice";
 import loanSlice from "../features/loanSlice";
 import authSlice from "../features/authSlice";
 import expensesSlice from "../features/expensesSlice";
+import donationSlice from "../features/donationSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     loans: loanSlice,
     auth: authSlice,
     expenses: expensesSlice,
+    donations: donationSlice,
   },
 });
 

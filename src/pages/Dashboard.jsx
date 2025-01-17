@@ -74,7 +74,7 @@ const Dashboard = () => {
                 className="block px-4 py-2 hover:bg-gray-700 rounded"
                 onClick={() => setIsSidebarOpen(false)}
               >
-                Expense add & Edit
+                Expense Edit
               </Link>
             </li>
             <li>
@@ -86,15 +86,7 @@ const Dashboard = () => {
                 Blog Edit
               </Link>
             </li>
-            <li>
-              <Link
-                to="/dashboard/overview"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Overview
-              </Link>
-            </li>
+           
             <li>
               <Link
                 to="users"
@@ -106,7 +98,34 @@ const Dashboard = () => {
             </li>
             <li>
               <Link
-                to="/dashboard/settings"
+                to="addDonation"
+                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                Add Donation
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="donation"
+                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                Donate 
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="addExpense"
+                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                AddExpense
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="settings"
                 className="block px-4 py-2 hover:bg-gray-700 rounded"
                 onClick={() => setIsSidebarOpen(false)}
               >

@@ -22,6 +22,10 @@ import ExpenseEdit from "./pages/ExpenseEdit";
 import BlogEdit from "./pages/BlogEdit";
 import MessageAll from "./componants/MessageAll";
 import AddTestimonial from "./pages/AddTestimonial";
+import Settings from "./pages/Settings";
+import Donation from "./componants/Donation";
+import AddExpense from "./pages/AddExpense";
+import AddDonation from "./pages/AddDonation";
 
 function App() {
   
@@ -47,8 +51,12 @@ function App() {
         <Route path="blogEdit" element={<BlogEdit />} />
         <Route path="allMessages" element={<MessageAll />} />
         <Route path="addTestimonial" element={<AddTestimonial />} />
+        <Route path="donation" element={<Donation />} />
+        <Route path="addDonation" element={<AddDonation />} />
+        <Route path="addExpense" element={<AddExpense />} />
+        <Route path="settings" element={<Settings />} />
         </Route>
-        <Route path="/:id" element={<ProtectedRoute><BlogDetails /></ProtectedRoute>} />
+        <Route path="/blogs/:id" element={<ProtectedRoute><BlogDetails /></ProtectedRoute>} />
           {/* 
           <Route path="contact" element={<Contact />} />
            */}

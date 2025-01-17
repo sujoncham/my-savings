@@ -5,7 +5,7 @@ import { fetchExpenses } from "../redux/features/expensesSlice";
 const Expenses = () => {
     const dispatch = useDispatch();
     const { expenses, loading, error } = useSelector((state) => state.expenses);
-    // console.log(expenses)
+    console.log(expenses)
 
     useEffect(() => {
         
@@ -34,7 +34,7 @@ const Expenses = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {expenses.length ? expenses.map((expen, index) => (
+                    {expenses?.length ? expenses.map((expen, index) => (
                         <tr key={expen._id} className="bg-gray-50">
                             <td className="border border-gray-300 px-4 py-2">
                                 {index +1}

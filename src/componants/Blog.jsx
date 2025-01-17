@@ -32,7 +32,7 @@ const Blog = () => {
               <p className="text-xs text-gray-500">
                 Published {moment(blog.createdAt).fromNow()} ({moment(blog.createdAt).format("MMMM Do, YYYY")})
               </p>
-              <Link to={`/${blog._id}`} className="text-blue-500 hover:underline mt-4 inline-block">
+              <Link to={`/blogs/${blog._id}`} className="text-blue-500 hover:underline mt-4 inline-block">
                 Read More
               </Link>
             </div>

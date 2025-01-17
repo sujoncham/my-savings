@@ -53,6 +53,13 @@ const WelcomePage = () => {
                             {totalExpense} tk
                         </p>
                     </div>
+                    {/* Total Balance */}
+                    <div className="bg-white shadow rounded-lg p-6 text-center">
+                        <h2 className="text-lg font-semibold text-gray-600">Social Activities</h2>
+                        <p className="text-2xl font-bold text-green-500 mt-2">
+                            {"0"} tk
+                        </p>
+                    </div>
 
                     {/* Current Balance */}
                     <div className="bg-white shadow rounded-lg p-6 text-center">
