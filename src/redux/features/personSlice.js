@@ -10,7 +10,7 @@ export const fetchPersons = createAsyncThunk(
     const response = await axios.get(
       "https://amar-savings-loan.onrender.com/api/persons"
     );
-    return response.data; // List of persons
+    return response.data.data; // List of persons
   }
 );
 
@@ -21,7 +21,7 @@ export const addMoney = createAsyncThunk(
       `https://amar-savings-loan.onrender.com/api/persons/${id}/add-money`,
       { amount }
     );
-    return response.data; // Updated person
+    return response.data.data; // Updated person
   }
 );
 
@@ -32,7 +32,7 @@ export const updateSavings = createAsyncThunk(
     const response = await axios.put(`${API_URL}/${id}/edit-savings`, {
       savings,
     });
-    return response.data;
+    return response.data.data;
   }
 );
 

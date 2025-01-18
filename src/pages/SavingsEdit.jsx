@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const SavingsEdit = () => {
   const { persons, loading, error } = useSelector((state) => state.persons);
+  // console.log(persons)
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);

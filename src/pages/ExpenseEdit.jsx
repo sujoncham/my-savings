@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchExpenses, updateExpense, deleteExpense } from "../redux/features/expensesSlice";
+import { deleteExpense, fetchExpenses, updateExpense } from "../redux/features/expensesSlice";
+
 
 const ExpenseEdit = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +53,15 @@ const ExpenseEdit = () => {
     const handleDelete = (id) => {
         dispatch(deleteExpense(id));
     };
+
+    // const handleDelete = async (id) => {
+    //     try {
+    //         await axios.delete(`http://localhost:5000/api/expenses/${id}`);
+      
+    //     } catch (error) {
+    //         console.error("There was an error deleting the expense!", error);
+    //     }
+    // };
 
     return (
         <div className="container mx-auto p-5">

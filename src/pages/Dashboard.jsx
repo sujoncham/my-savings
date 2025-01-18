@@ -1,5 +1,7 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
+
+
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -8,9 +10,9 @@ const Dashboard = () => {
     <div className="flex flex-col lg:flex-row h-screen">
       {/* Sidebar (Mobile + Desktop) */}
       <aside
-        className={`bg-green-800 text-white w-64 flex flex-col fixed lg:static top-0 left-0 h-full z-40 transform ${
+        className={`bg-green-800 text-white w-64 flex flex-col fixed lg:static top-0 left-0 z-40 transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out lg:translate-x-0`}
+        } transition-transform duration-300 ease-in-out lg:translate-x-0 min-h-screen`}
       >
         <div className="p-4 text-lg font-bold border-b border-gray-700 flex items-center justify-between">
           <span>Dashboard Menu</span>
@@ -23,121 +25,149 @@ const Dashboard = () => {
         </div>
         <nav className="flex-grow overflow-y-auto">
           <ul className="space-y-2 p-4">
+            {/* Links */}
             <li>
-              <Link
+              <NavLink 
                 to="savingsEdit"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Savings Edit
-              </Link>
+              </NavLink >
             </li>
             <li>
-              <Link
+              <NavLink 
                 to="loanEdit"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 loan Edit
-              </Link>
+              </NavLink >
             </li>
             <li>
-              <Link
+              <NavLink 
                 to="allMessages"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 All messages
-              </Link>
+              </NavLink >
             </li>
+            
             <li>
-              <Link
-                to="addBlog"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Add Blog
-              </Link>
-            </li>
-            <li>
-              <Link
+              <NavLink 
                 to="addTestimonial"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Add Testimonial
-              </Link>
+              </NavLink >
             </li>
+            
             <li>
-              <Link
-                to="expenseEdit"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+              <NavLink 
+                to="addBlog"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
-                Expense Edit
-              </Link>
+                Add Blog
+              </NavLink >
             </li>
             <li>
-              <Link
+              <NavLink 
                 to="blogEdit"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Blog Edit
-              </Link>
+              </NavLink >
             </li>
            
             <li>
-              <Link
+              <NavLink 
                 to="users"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Users
-              </Link>
+              </NavLink >
             </li>
             <li>
-              <Link
+              <NavLink 
                 to="addDonation"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Add Donation
-              </Link>
+              </NavLink >
             </li>
             <li>
-              <Link
+              <NavLink 
                 to="donation"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Donate 
-              </Link>
+              </NavLink >
             </li>
             <li>
-              <Link
+              <NavLink 
                 to="addExpense"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 AddExpense
-              </Link>
+              </NavLink >
             </li>
             <li>
-              <Link
+              <NavLink 
+                to="expenseEdit"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                Expense Edit
+              </NavLink >
+            </li>
+            <li>
+              <NavLink 
                 to="settings"
-                className="block px-4 py-2 hover:bg-gray-700 rounded"
+                className={({ isActive }) =>
+  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+}
                 onClick={() => setIsSidebarOpen(false)}
               >
                 Settings
-              </Link>
+              </NavLink >
             </li>
           </ul>
+          
         </nav>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow bg-gray-100 p-4 pt-16 lg:pt-4 min-h-screen relative">
+      <main className="flex-grow bg-gray-100 p-4 pt-16 lg:pt-4 min-h-screen overflow-auto relative">
         {/* Toggle Button for Sidebar */}
         <button
           onClick={() => setIsSidebarOpen(true)}
@@ -154,3 +184,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+

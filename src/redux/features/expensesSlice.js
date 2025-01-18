@@ -59,7 +59,7 @@ export const deleteExpense = createAsyncThunk(
   "expenses/deleteExpense",
   async (id, thunkAPI) => {
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`http://localhost:5000/api/expenses/${id}`);
       return id; // Return the ID of the deleted expense
     } catch (error) {
       return thunkAPI.rejectWithValue(
