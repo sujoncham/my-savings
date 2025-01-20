@@ -30,7 +30,7 @@ const Blog = () => {
               <p className="text-sm">{blog.content.slice(0, 120)} ...</p>
               <img src={blog.image} alt={blog.title} className="my-4 w-full h-48 object-cover rounded" />
               <p className="text-xs text-gray-500">
-                Published {moment(blog.createdAt).fromNow()} ({moment(blog.createdAt).format("MMMM Do, YYYY")})
+                Published {moment(blog.createdAt).fromNow()} ({moment(blog.createdAt).format("ll")})
               </p>
               <Link to={`/blogs/${blog._id}`} className="text-blue-500 hover:underline mt-4 inline-block">
                 Read More

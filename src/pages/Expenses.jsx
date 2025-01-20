@@ -23,14 +23,14 @@ const Expenses = () => {
             
             <div className="py-10">
             <h2 className="text-xl font-bold mb-4">Expense History - { totalExpense}tk</h2>
-            <table className="w-full table-auto border-collapse border border-gray-300">
-                <thead>
-                    <tr className="bg-gray-100">
-                        <th className="border border-gray-300 px-4 py-2 text-left">Sl</th>
-                        <th className="border border-gray-300 px-4 py-2 text-left">Date</th>
-                        <th className="border border-gray-300 px-4 py-2 text-left">Title</th>
-                        <th className="border border-gray-300 px-4 py-2 text-left">Amount</th>
-                        <th className="border border-gray-300 px-4 py-2 text-left">Actions</th>
+            <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
+            <thead className="bg-blue-500 text-white">
+                    <tr>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Sl</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Date</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Title</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Amount</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateLoan , fetchLoans, addLoan} from "../redux/features/loanSlice";
 import LoanDetails from "../componants/LoanDetails";
 import { fetchPersons } from "../redux/features/personSlice";
+import moment from "moment";
+import AddLoan from "./AddLoan";
 
 const Loan = () => {
 
@@ -14,6 +16,8 @@ const Loan = () => {
   const [interestPayment, setInterestPayment] = useState("");
   const [name, setName] = useState("");
   const [loanAmount, setLoanAmount] = useState("");
+  const [referName, setReferName] = useState("");
+  const [recieveDate, setRecieveDate] = useState("");
 
 
   const { loans, loading, error } = useSelector((state) => state.loans);
@@ -57,6 +61,7 @@ const Loan = () => {
     setIsModalOpen(false);
     setLoanModalOpen(false)
     setHistoryModalOpen(false);
+    
   };
 
   
@@ -122,7 +127,8 @@ const Loan = () => {
       <hr className="m-10"/>
       {/* Add Loan Button */}
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
         {loans.length ? loans?.map((loan) => (
           <div
             key={loan._id}
@@ -130,67 +136,60 @@ const Loan = () => {
           >
            
             <div>
-            <h2 className="text-lg font-semibold">{loan.name}</h2>
-              <p>Total Loan: {loan.totalLoan} Taka</p>
-              <p>Total Interest: {loan.totalInterest} Taka</p>
-              <p>Remaining Loan: {loan.remainingLoan} Taka</p>
-              <p>Remaining Interest: {loan.remainingInterest} Taka</p>
+              <h2 className="text-4xl font-semibold">{loan.name}</h2>
+              <hr className="m-5"/>
+                <div className="flex justify-between items-center">
+                  <div>
+                  <p>Total Loan: {loan.totalLoan} Taka</p>
+                  <p>Total Interest: {loan.totalInterest} Taka</p>
+                  </div>
+                  <div> <p>Remaining Loan: {loan.remainingLoan} Taka</p>
+                    <p>Remaining Interest: {loan.remainingInterest} Taka</p>
+                  </div>
+                  <div>
+                  <p>Loan Recieved: {moment(loan.createdAt).format("ll")}</p>
+                  </div>
+                  <div>
+                  <p>Loan Refer: {loan.referName}</p>
+                  </div>
+                  <div>
+                  <button
+                      onClick={() => openModal(loan)}
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-3"
+                    >
+                      Deduct Payment
+                    </button>
+                    <button
+                      onClick={() => openHistoryModal(loan)}
+                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 mt-3"
+                    >
+                      Show History
+                    </button>
+                  </div>
+                </div>
             </div>
-            <button
-              onClick={() => openModal(loan)}
-              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-3"
-            >
-              Deduct Payment
-            </button>
-            <button
-              onClick={() => openHistoryModal(loan)}
-              className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 mt-3"
-            >
-              Show History
-            </button>
+            
           </div>
         )) : (<div
         className="bg-white p-4 shadow-md rounded-md border border-gray-200"
         > <h1>No Loans Found</h1>
         </div>)}
       </div>
+      </div>
 
       {loanModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-5 rounded-md shadow-lg w-80">
-            <h3 className="text-lg font-semibold mb-3">Add Loan</h3>
-            <form onSubmit={handleAddLoan}>
-              <input
-                type="text"
-                placeholder="Receiver Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded mb-3"
-              />
-              <input
-                type="number"
-                placeholder="Loan Amount"
-                value={loanAmount}
-                onChange={(e) => setLoanAmount(e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded mb-3"
-              />
-              <div className="flex justify-end space-x-3">
-                <button
-                  onClick={closeModal}
-                  className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
-                >
-                  Add Loan
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <AddLoan
+          setLoanAmount={setLoanAmount}
+          loanAmount={loanAmount}
+          closeModal={closeModal}
+          setName={setName}
+          handleAddLoan={handleAddLoan}
+          name={name}
+          setRecieveDate={setRecieveDate}
+          setReferName={setReferName}
+          recieveDate={recieveDate}
+          referName={referName}
+        />
       )}
 
       {isModalOpen && (

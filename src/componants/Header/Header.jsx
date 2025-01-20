@@ -62,7 +62,7 @@ const Header = () => {
           className="md:hidden focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <svg
+          {/* <svg
             className="w-6 h-6"
             fill="none"
             stroke="currentColor"
@@ -75,7 +75,8 @@ const Header = () => {
               strokeWidth="2"
               d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
             ></path>
-          </svg>
+          </svg> */}
+          {isMenuOpen ? <span className="fas fa-times">yes</span> : <span className="fas fa-bars">no</span>}
         </button>
       </div>
 

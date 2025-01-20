@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import moment from "moment";
 
 const MessageAll = () => {
     const [messages, setMessages] = useState([]);
@@ -59,70 +60,72 @@ const MessageAll = () => {
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Messages</h1>
             <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
-    <thead className="bg-blue-500 text-white">
-        <tr>
-            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Name</th>
-            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Email</th>
-            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Message</th>
-            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Status</th>
-            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {messages.length ? (
-            messages.map((message) => (
-                <tr
-                    key={message._id}
-                    className="odd:bg-gray-50 even:bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
-                >
-                    <td className="py-4 px-6 border-b border-gray-200">{message.name}</td>
-                    <td className="py-4 px-6 border-b border-gray-200">{message.email}</td>
-                    <td className="py-4 px-6 border-b border-gray-200">{message.message}</td>
-                    <td className="py-4 px-6 border-b border-gray-200">
-                        <span
-                            className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-                                message.status === "read"
-                                    ? "bg-green-100 text-green-600"
-                                    : "bg-yellow-100 text-yellow-600"
-                            }`}
-                        >
-                            {message.status}
-                        </span>
-                    </td>
-                    <td className="py-4 px-6 border-b border-gray-200">
-                        {message.status !== "read" ? (
-                            <button
-                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-                                onClick={() => openModal(message)}
+                <thead className="bg-blue-500 text-white">
+                    <tr>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Date</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Name</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Email</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Message</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Status</th>
+                        <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {messages.length ? (
+                        messages.map((message) => (
+                            <tr
+                                key={message._id}
+                                className="odd:bg-gray-50 even:bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
                             >
-                                Mark as Read
-                            </button>
-                        ) : (
-                            <div className="flex items-center space-x-2">
-                                <span className="text-sm font-medium text-gray-600">Done</span>
-                                <button
-                                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-                                    onClick={() => handleDelete(message._id)}
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        )}
-                    </td>
-                </tr>
-            ))
-        ) : (
-            <tr>
-                <td
-                    colSpan="5"
-                    className="py-6 px-6 border-b border-gray-200 text-center text-gray-500"
-                >
-                    No messages yet
-                </td>
-            </tr>
-        )}
-    </tbody>
-</table>
+                                <td className="py-4 px-6 border-b border-gray-200"> {moment(message.createdAt).fromNow()} ({moment(message.createdAt).format("ll")})</td>
+                                <td className="py-4 px-6 border-b border-gray-200">{message.name}</td>
+                                <td className="py-4 px-6 border-b border-gray-200">{message.email}</td>
+                                <td className="py-4 px-6 border-b border-gray-200">{message.message.slice(0,50)}</td>
+                                <td className="py-4 px-6 border-b border-gray-200">
+                                    <span
+                                        className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                                            message.status === "read"
+                                                ? "bg-green-100 text-green-600"
+                                                : "bg-yellow-100 text-yellow-600"
+                                        }`}
+                                    >
+                                        {message.status}
+                                    </span>
+                                </td>
+                                <td className="py-4 px-6 border-b border-gray-200">
+                                    {message.status !== "read" ? (
+                                        <button
+                                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                                            onClick={() => openModal(message)}
+                                        >
+                                            Mark as Read
+                                        </button>
+                                    ) : (
+                                        <div className="flex items-center space-x-2">
+                                            <span className="text-sm font-medium text-gray-600">Done</span>
+                                            <button
+                                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                                                onClick={() => handleDelete(message._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    )}
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td
+                                colSpan="5"
+                                className="py-6 px-6 border-b border-gray-200 text-center text-gray-500"
+                            >
+                                No messages yet
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
 
 
             {/* Modal */}

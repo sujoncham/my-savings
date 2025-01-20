@@ -73,24 +73,27 @@ const ExpenseEdit = () => {
             ) : error ? (
                 <p className="text-red-500">{error}</p>
             ) : (
-                <table className="w-full table-auto border-collapse border border-gray-300">
-                    <thead>
-                        <tr className="bg-gray-100">
-                            <th className="border border-gray-300 px-4 py-2 text-left">Sl</th>
-                            <th className="border border-gray-300 px-4 py-2 text-left">Date</th>
-                            <th className="border border-gray-300 px-4 py-2 text-left">Title</th>
-                            <th className="border border-gray-300 px-4 py-2 text-left">Amount</th>
-                            <th className="border border-gray-300 px-4 py-2 text-left">Actions</th>
+                <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
+                <thead className="bg-blue-500 text-white">
+                        <tr>
+                            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Sl</th>
+                            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Date</th>
+                            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Title</th>
+                            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Note</th>
+                            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Amount</th>
+                            <th className="py-4 px-6 text-left font-semibold uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {expenses?.map((expen, index) => (
-                            <tr key={expen._id} className="bg-gray-50">
+                            <tr key={expen._id} className="odd:bg-gray-50 even:bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
+                            >
                                 <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
                                 <td className="border border-gray-300 px-4 py-2">
                                     {new Date(expen.createdAt).toDateString()}
                                 </td>
                                 <td className="border border-gray-300 px-4 py-2">{expen.title}</td>
+                                <td className="border border-gray-300 px-4 py-2">{expen.note}</td>
                                 <td className="border border-gray-300 px-4 py-2">{expen.expense}</td>
                                 <td className="border border-gray-300 px-4 py-2">
                                     <button

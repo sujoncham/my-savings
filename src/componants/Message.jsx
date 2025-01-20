@@ -45,7 +45,7 @@ const Message = () => {
     };
 
     return (
-        <section className="bg-gradient-to-r from-blue-500 to-teal-500 py-20">
+        
             <div className="container mx-auto">
                 <h2 className="text-2xl font-bold text-center mb-8">Get in Touch</h2>
                 <form className="max-w-lg mx-auto" onSubmit={handleSubmit}>
@@ -92,7 +92,6 @@ const Message = () => {
                     </div>
                 </form>
             </div>
-        </section>
     );
 };
 

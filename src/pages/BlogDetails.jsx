@@ -44,7 +44,7 @@ const BlogDetails = () => {
                 <>
                     <h1 className="text-4xl font-bold mb-4">{blog.title}</h1>
                     <p className="text-xs text-gray-500 mb-5">
-                        Published {moment(blog.createdAt).fromNow()} ({moment(blog.createdAt).format("MMMM Do, YYYY")})
+                        Published {moment(blog.createdAt).fromNow()} ({moment(blog.createdAt).format("ll")})
                     </p>
                     <img className="w-full h-auto mb-4" src={blog.image} alt={blog.title} />
                     <p className="text-lg text-gray-700 mb-8">{blog.content}</p>

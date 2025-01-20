@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  fetchLoans, editLoans, } from "../redux/features/loanSlice";
+import {  fetchLoans, editLoans, deleteLoan, } from "../redux/features/loanSlice";
 
 const LoanEdit = () => {
   const { loans, loading, error } = useSelector((state) => state.loans);
@@ -11,6 +11,7 @@ const LoanEdit = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentLoan, setCurrentLoan] = useState(null);
   const [newLoans, setNewLoan] = useState("");
+  const [loanerName, setLoanerName] = useState("");
 
    useEffect(() => {
       dispatch(fetchLoans());
@@ -20,6 +21,7 @@ const LoanEdit = () => {
   const openModal = (loan) => {
     setCurrentLoan(loan);
     setNewLoan(loan.totalLoan);
+    setLoanerName(loan.name);
     setIsModalOpen(true);
   };
 
@@ -31,7 +33,7 @@ const LoanEdit = () => {
 
   const handleSave =async () => {
     if (currentLoan && newLoans) {
-        await dispatch(editLoans({ id: currentLoan._id, totalLoan: parseInt(newLoans) }));
+        await dispatch(editLoans({ id: currentLoan._id, name:loanerName, totalLoan: parseInt(newLoans) }));
         dispatch(fetchLoans());
       closeModal();
     }
@@ -40,8 +42,16 @@ const LoanEdit = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  // Delete Expense Handler
+      const handleDelete = (id) => {
+          dispatch(deleteLoan(id));
+      };
+
   return (
     <div>
+      <div>
+      <h2 className="text-2xl font-bold mb-4">Loan Edit</h2>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
         {loans.length ? loans?.map((loan) => (
           <div
@@ -53,12 +63,20 @@ const LoanEdit = () => {
             <h2 className="text-lg font-semibold">{loan.name}</h2>
               <p>Total Loan: {loan.totalLoan} Taka</p>
             </div>
+            <div>
             <button
               onClick={() => openModal(loan)}
               className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-3"
             >
               Edit loan
+              </button>
+              <button
+              onClick={() => handleDelete(loan._id)}
+              className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+            >
+              del loan
             </button>
+            </div>
             
           </div>
         )) : <div className="bg-white p-4 shadow-md rounded-md border border-gray-200">No loans found</div>}
@@ -70,6 +88,13 @@ const LoanEdit = () => {
             <h3 className="text-lg font-semibold mb-3">
               Edit Loan for {currentLoan?.name}
             </h3>
+            <input
+              type="text"
+              value={loanerName}
+              onChange={(e) => setLoanerName(e.target.value)}
+              placeholder="Enter Name"
+              className="w-full p-2 border border-gray-300 rounded mb-3"
+            />
             <input
               type="number"
               value={newLoans}

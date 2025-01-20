@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Blog from "../componants/Blog";
 import Message from "../componants/Message";
 import Testimonial from "../componants/Testimonial";
@@ -15,8 +16,8 @@ const Home = () => {
                 <h1 className="text-4xl font-bold mb-4">Manage Savings and Loans Effortlessly!</h1>
                 <p className="text-lg mb-6">Simple, intuitive, and secure solutions for tracking and managing your finances.</p>
                 <div className="flex justify-center space-x-4">
-                    <a href="/signup" className="bg-white text-blue-500 px-6 py-2 rounded font-semibold">Get Started Now</a>
-                    <a href="#services" className="bg-blue-700 px-6 py-2 rounded font-semibold">Learn More</a>
+                    <a href={"#contact"} className="bg-white text-blue-500 px-6 py-2 rounded font-semibold">Get Started Now</a>
+                    <Link href="#services" className="bg-blue-700 px-6 py-2 rounded font-semibold">Learn More</Link>
                 </div>
                 </div>
             </section>
@@ -50,7 +51,7 @@ const Home = () => {
            <Blog />
 
             {/* { Sliding Services Section } */}
-            <section className="bg-gray-100 py-16">
+            <section  className="bg-gray-300 py-16">
                 <div className="container mx-auto px-4">
                 <h2 className="text-2xl font-bold text-center mb-8">Our Services</h2>
                 <div className="relative">
@@ -82,7 +83,10 @@ const Home = () => {
 
 
             {/* Contact Section  */}
+            <section id="contact" className="bg-gradient-to-r from-blue-500 to-teal-500 py-20">
+
             <Message />
+            </section>
             </div>
     );
 };

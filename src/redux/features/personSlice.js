@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "https://amar-savings-loan.onrender.com/api/persons";
+const API_URL = "http://localhost:5000/api/persons";
 
 // Async Thunks
 export const fetchPersons = createAsyncThunk(
@@ -28,9 +28,10 @@ export const addMoney = createAsyncThunk(
 // Update savings
 export const updateSavings = createAsyncThunk(
   "persons/updateSavings",
-  async ({ id, savings }) => {
+  async ({ id, savings, name }) => {
     const response = await axios.put(`${API_URL}/${id}/edit-savings`, {
       savings,
+      name,
     });
     return response.data.data;
   }

@@ -11,6 +11,7 @@ const SavingsEdit = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPerson, setCurrentPerson] = useState(null);
   const [newSavings, setNewSavings] = useState("");
+  const [personName, setPersonName] = useState("");
 
   useEffect(() => {
     dispatch(fetchPersons());
@@ -19,6 +20,7 @@ const SavingsEdit = () => {
   const openModal = (person) => {
     setCurrentPerson(person);
     setNewSavings(person.savings);
+    setPersonName(person.name);
     setIsModalOpen(true);
   };
 
@@ -30,7 +32,7 @@ const SavingsEdit = () => {
 
   const handleSave =async () => {
     if (currentPerson && newSavings) {
-        await dispatch(updateSavings({ id: currentPerson._id, savings: parseInt(newSavings) }));
+        await dispatch(updateSavings({ id: currentPerson._id, name:personName, savings: parseInt(newSavings) }));
         dispatch(fetchPersons());
       closeModal();
     }
@@ -82,6 +84,13 @@ const SavingsEdit = () => {
             <h3 className="text-lg font-semibold mb-3">
               Edit Savings for {currentPerson?.name}
             </h3>
+            <input
+              type="text"
+              value={personName}
+              onChange={(e) => setPersonName(e.target.value)}
+              placeholder="Enter Name"
+              className="w-full p-2 border border-gray-300 rounded mb-3"
+            />
             <input
               type="number"
               value={newSavings}

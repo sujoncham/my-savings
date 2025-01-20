@@ -9,6 +9,12 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col lg:flex-row h-screen">
       {/* Sidebar (Mobile + Desktop) */}
+      {isSidebarOpen && (
+        <div
+          onClick={() => setIsSidebarOpen(false)}
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+        />
+      )}
       <aside
         className={`bg-green-800 text-white w-64 flex flex-col fixed lg:static top-0 left-0 z-40 transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -30,7 +36,8 @@ const Dashboard = () => {
               <NavLink 
                 to="savingsEdit"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -41,7 +48,8 @@ const Dashboard = () => {
               <NavLink 
                 to="loanEdit"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -52,7 +60,8 @@ const Dashboard = () => {
               <NavLink 
                 to="allMessages"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -64,7 +73,8 @@ const Dashboard = () => {
               <NavLink 
                 to="addTestimonial"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -76,7 +86,8 @@ const Dashboard = () => {
               <NavLink 
                 to="addBlog"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -87,7 +98,8 @@ const Dashboard = () => {
               <NavLink 
                 to="blogEdit"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -99,7 +111,8 @@ const Dashboard = () => {
               <NavLink 
                 to="users"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -110,7 +123,8 @@ const Dashboard = () => {
               <NavLink 
                 to="addDonation"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -121,7 +135,8 @@ const Dashboard = () => {
               <NavLink 
                 to="donation"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -132,7 +147,8 @@ const Dashboard = () => {
               <NavLink 
                 to="addExpense"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -143,7 +159,8 @@ const Dashboard = () => {
               <NavLink 
                 to="expenseEdit"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -154,7 +171,8 @@ const Dashboard = () => {
               <NavLink 
                 to="settings"
                 className={({ isActive }) =>
-  `block px-4 py-2 rounded ${isActive ? "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
+                  `block px-4 py-2 rounded ${isActive ?
+                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
@@ -174,7 +192,9 @@ const Dashboard = () => {
           className="lg:hidden bg-gray-800 text-white p-2 rounded-full fixed top-4 left-4 z-50"
         >
           ☰
+          
         </button>
+        
 
         {/* Outlet renders child routes */}
         <Outlet />
