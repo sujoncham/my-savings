@@ -23,9 +23,10 @@ import BlogEdit from "./pages/BlogEdit";
 import MessageAll from "./componants/MessageAll";
 import AddTestimonial from "./pages/AddTestimonial";
 import Settings from "./pages/Settings";
-import Donation from "./componants/Donation";
+
 import AddExpense from "./pages/AddExpense";
-import AddDonation from "./pages/AddDonation";
+import DonationDonate from "./pages/DonationDonate";
+
 
 function App() {
   
@@ -40,6 +41,7 @@ function App() {
         <Route path="/loan" element={<ProtectedRoute><Loan /></ProtectedRoute>} />
         <Route path="/expense" element={<ProtectedRoute><Expenses /></ProtectedRoute>} />
         <Route path="/signin" element={<Signin />} />
+        
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} >
         <Route index element={<WelcomePage />} />
@@ -51,9 +53,8 @@ function App() {
         <Route path="blogEdit" element={<BlogEdit />} />
         <Route path="allMessages" element={<MessageAll />} />
         <Route path="addTestimonial" element={<AddTestimonial />} />
-        <Route path="donation" element={<Donation />} />
-        <Route path="addDonation" element={<AddDonation />} />
         <Route path="addExpense" element={<AddExpense />} />
+        <Route path="donation" element={<DonationDonate />} />
         <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/blogs/:id" element={<ProtectedRoute><BlogDetails /></ProtectedRoute>} />

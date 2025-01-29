@@ -43,7 +43,7 @@ const Expenses = () => {
                                 {new Date(expen.createdAt).toDateString()}
                             </td>
                             <td className="border border-gray-300 px-4 py-2">{expen.title}</td>
-                            <td className="border border-gray-300 px-4 py-2">{expen.expense}</td>
+                            <td className="border border-gray-300 px-4 py-2">{expen.expense}tk</td>
                             <td className="border border-gray-300 px-4 py-2">
                                 {expen.note }
                             </td>

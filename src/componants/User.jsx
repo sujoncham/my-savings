@@ -66,16 +66,16 @@ const User = () => {
     
 
   return (
-    <div className="container mx-auto mt-8 p-4 bg-gray-100 rounded-lg shadow-md">
-          <div className="flex justify-between items-center py-10">
+    <div className="container mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="flex justify-between items-center py-5">
           <h1 className="text-3xl font-bold text-center">User List</h1>
           <button
-                  onClick={() => setIsModalOpen1(!isModalOpen1)}
-                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mr-2"
-                >
-                  create user
-                </button>
-          </div>
+                onClick={() => setIsModalOpen1(!isModalOpen1)}
+                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mr-2"
+              >
+                create user
+              </button>
+        </div>
       <table className="min-w-full bg-white rounded-lg overflow-hidden shadow-lg">
         <thead className="bg-gray-200">
           <tr>

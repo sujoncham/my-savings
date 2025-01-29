@@ -121,18 +121,6 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink 
-                to="addDonation"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Add Donation
-              </NavLink >
-            </li>
-            <li>
-              <NavLink 
                 to="donation"
                 className={({ isActive }) =>
                   `block px-4 py-2 rounded ${isActive ?
@@ -140,9 +128,10 @@ const Dashboard = () => {
 }
                 onClick={() => setIsSidebarOpen(false)}
               >
-                Donate 
+                Donation & Donate
               </NavLink >
             </li>
+          
             <li>
               <NavLink 
                 to="addExpense"

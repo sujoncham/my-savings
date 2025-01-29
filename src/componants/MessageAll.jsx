@@ -102,7 +102,7 @@ const MessageAll = () => {
                                         </button>
                                     ) : (
                                         <div className="flex items-center space-x-2">
-                                            <span className="text-sm font-medium text-gray-600">Done</span>
+                                            
                                             <button
                                                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
                                                 onClick={() => handleDelete(message._id)}

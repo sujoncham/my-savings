@@ -132,13 +132,13 @@ const Loan = () => {
         {loans.length ? loans?.map((loan) => (
           <div
             key={loan._id}
-            className="bg-white p-4 shadow-md rounded-md border border-gray-200"
+            className="mb-10 border-2 border-blue-500 p-5 rounded bg-green-800"
           >
            
             <div>
               <h2 className="text-4xl font-semibold">{loan.name}</h2>
-              <hr className="m-5"/>
-                <div className="flex justify-between items-center">
+              <hr className="mb-5"/>
+                <div className="flex justify-between items-center ">
                   <div>
                   <p>Total Loan: {loan.totalLoan} Taka</p>
                   <p>Total Interest: {loan.totalInterest} Taka</p>

@@ -44,7 +44,9 @@ const LoanEdit = () => {
 
   // Delete Expense Handler
       const handleDelete = (id) => {
-          dispatch(deleteLoan(id));
+        dispatch(deleteLoan(id));
+        const updatedLoans = loans.filter((loan) => loan._id !== id);
+  dispatch({ type: 'loans/setLoans', payload: updatedLoans });
       };
 
   return (

@@ -75,8 +75,8 @@ const loanSlice = createSlice({
     error: null,
   },
   reducers: {
-    setLoans(state, action) {
-      state.data = action.payload; // Update loans array
+    setLoans: (state, action) => {
+      state.loans = action.payload;
     },
   },
   extraReducers: (builder) => {
