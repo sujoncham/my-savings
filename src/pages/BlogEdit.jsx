@@ -81,7 +81,7 @@ const BlogEdit = () => {
                 <td className="border border-gray-300 px-4 py-2">{blog.title}</td>
                 <td className="border border-gray-300 px-4 py-2">{blog.content.slice(0, 70)}...</td>
                 <td className="border border-gray-300 px-4 py-2">
-                  <img src={blog.image} alt={blog.title} className="w-52 h-auto" />
+                  <img src={blog.image} alt={blog.title} className="w-52 h-20" />
                 </td>
                 <td className="border border-gray-300 px-4 py-2">
                   <button
@@ -105,7 +105,7 @@ const BlogEdit = () => {
         {/* Edit Modal */}
         {isEditModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-1/2"> 
               <h2 className="text-xl font-bold mb-4">Edit Blog</h2>
               <input
                 type="text"
@@ -119,6 +119,8 @@ const BlogEdit = () => {
                 value={updatedBlog.content}
                 onChange={(e) => setUpdatedBlog({ ...updatedBlog, content: e.target.value })}
                 className="w-full mb-4 px-4 py-2 border rounded"
+                rows={4}
+                
               ></textarea>
               <input
                 type="text"

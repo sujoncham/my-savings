@@ -95,6 +95,9 @@ const Loan = () => {
     dispatch(fetchLoans()); // Refresh the loan list after adding a new loan
   };
 
+
+  
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -136,7 +139,13 @@ const Loan = () => {
           >
            
             <div>
-              <h2 className="text-4xl font-semibold">{loan.name}</h2>
+              <div className="flex justify-between items-center mb-5 text-white">
+                <h2 className="text-4xl font-semibold">{loan.name}</h2>
+                
+                <p>{loan.status ? `Status: ${loan.status}` : "No notes available"}</p>
+
+                <p>{loan.note ? `Note: ${loan.note}` : "No notes available"}</p>
+              </div>
               <hr className="mb-5"/>
                 <div className="flex justify-between items-center ">
                   <div>

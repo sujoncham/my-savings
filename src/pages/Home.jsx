@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom";
-import Blog from "../componants/Blog";
+
 import Message from "../componants/Message";
 import Testimonial from "../componants/Testimonial";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { fetchBlogs } from "../redux/features/blogSlice";
 
 
 
 const Home = () => {
+    const dispatch = useDispatch();
+  const { homeBlogs, loading } = useSelector((state) => state.blogs);
+
+  useEffect(() => {
+    dispatch(fetchBlogs({ type: "home" }));
+  }, [dispatch]);
+
+  if (loading) return <p>Loading...</p>;
     return (
         <div>
             
@@ -48,7 +59,28 @@ const Home = () => {
             </section>
 
             {/* {Blog Section} */}
-           <Blog />
+            <section id="home-blog" className="bg-gray-100 py-16">
+                <div className="container mx-auto">
+                    <h2 className="text-2xl font-bold text-center mb-8">Latest Blog Posts</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {homeBlogs.map((blog) => (
+                        <div key={blog._id} className="p-6 bg-white rounded shadow">
+                        <h3 className="text-lg font-semibold mb-2">{blog.title}</h3>
+                        <p className="text-sm">{blog.content.slice(0, 120)} ...</p>
+                        <img src={blog.image} alt={blog.title} className="my-4 w-full h-48 object-cover rounded" />
+                        <Link to={`/blogs/${blog._id}`} className="text-blue-500 hover:underline mt-4 inline-block">
+                            Read More
+                        </Link>
+                        </div>
+                    ))}
+                    </div>
+                    <div className="text-center mt-6">
+                    <Link to="/blogs" className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                        View All Blogs
+                    </Link>
+                    </div>
+                </div>
+                </section>
 
             {/* { Sliding Services Section } */}
             <section  className="bg-gray-300 py-16">

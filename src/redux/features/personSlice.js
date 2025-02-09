@@ -7,9 +7,7 @@ const API_URL = "http://localhost:5000/api/persons";
 export const fetchPersons = createAsyncThunk(
   "person/fetchPersons",
   async () => {
-    const response = await axios.get(
-      "https://amar-savings-loan.onrender.com/api/persons"
-    );
+    const response = await axios.get(`${API_URL}`);
     return response.data.data; // List of persons
   }
 );
@@ -17,10 +15,7 @@ export const fetchPersons = createAsyncThunk(
 export const addMoney = createAsyncThunk(
   "person/addMoney",
   async ({ id, amount }) => {
-    const response = await axios.put(
-      `https://amar-savings-loan.onrender.com/api/persons/${id}/add-money`,
-      { amount }
-    );
+    const response = await axios.put(`${API_URL}/${id}/add-money`, { amount });
     return response.data.data; // Updated person
   }
 );

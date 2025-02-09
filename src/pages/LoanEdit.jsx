@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {  fetchLoans, editLoans, deleteLoan, } from "../redux/features/loanSlice";
+import {  fetchLoans, editLoans, deleteLoan, updateLoanStatus, } from "../redux/features/loanSlice";
 
 const LoanEdit = () => {
   const { loans, loading, error } = useSelector((state) => state.loans);
@@ -12,6 +12,7 @@ const LoanEdit = () => {
   const [currentLoan, setCurrentLoan] = useState(null);
   const [newLoans, setNewLoan] = useState("");
   const [loanerName, setLoanerName] = useState("");
+  const [loanNote, setLoanNote] = useState("");
 
    useEffect(() => {
       dispatch(fetchLoans());
@@ -22,6 +23,7 @@ const LoanEdit = () => {
     setCurrentLoan(loan);
     setNewLoan(loan.totalLoan);
     setLoanerName(loan.name);
+    setLoanNote(loan.note);
     setIsModalOpen(true);
   };
 
@@ -33,7 +35,7 @@ const LoanEdit = () => {
 
   const handleSave =async () => {
     if (currentLoan && newLoans) {
-        await dispatch(editLoans({ id: currentLoan._id, name:loanerName, totalLoan: parseInt(newLoans) }));
+        await dispatch(editLoans({ id: currentLoan._id, name:loanerName, note:loanNote, totalLoan: parseInt(newLoans) }));
         dispatch(fetchLoans());
       closeModal();
     }
@@ -48,6 +50,11 @@ const LoanEdit = () => {
         const updatedLoans = loans.filter((loan) => loan._id !== id);
   dispatch({ type: 'loans/setLoans', payload: updatedLoans });
       };
+
+  const handleStatusChange = async (id) => {
+    await dispatch(updateLoanStatus(id));
+    setIsModalOpen(false);
+    };
 
   return (
     <div>
@@ -104,6 +111,23 @@ const LoanEdit = () => {
               placeholder="Enter new savings"
               className="w-full p-2 border border-gray-300 rounded mb-3"
             />
+            <input
+              type="text"
+              value={loanNote}
+              onChange={(e) => setLoanNote(e.target.value)}
+              placeholder="Enter note"
+              className="w-full p-2 border border-gray-300 rounded mb-3"
+            />
+            <div className="flex justify-between items-center gap-2 mb-5">
+                  <p>Status :</p>
+                <button 
+                  onClick={() => handleStatusChange(currentLoan._id)} 
+                  className={`px-3 py-1 rounded
+                    ${currentLoan.status === "pending" ? "bg-yellow-500 hover:bg-yellow-600" : "bg-green-500 hover:bg-green-600"}`}
+                >
+                  {currentLoan.status === "pending" ? "Pending" : "Completed"}
+                </button>
+                </div>
             <div className="flex justify-end space-x-3">
               <button
                 onClick={closeModal}

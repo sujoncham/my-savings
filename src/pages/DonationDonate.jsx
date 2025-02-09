@@ -66,7 +66,7 @@ const DonationDonate = () => {
         {/* Add Collection */}
         <div className="p-6 bg-white shadow rounded-lg mb-10">
           <h3 className="text-xl font-semibold text-gray-700 mb-4">Add to Collection</h3>
-          <div className="flex gap-4 items-center">
+          <div className="grid md:grid-cols-4 gap-4 mb-4">
             <input
               type="text"
               value={collectionTitle}
@@ -102,7 +102,7 @@ const DonationDonate = () => {
         {/* Make a Donation */}
         <div className="p-6 bg-white shadow rounded-lg mb-10">
           <h3 className="text-xl font-semibold text-gray-700 mb-4">Make a Donation</h3>
-          <div className="grid md:grid-cols-3 gap-4 mb-4">
+          <div className="grid md:grid-cols-4 gap-4 mb-4">
             <input
               type="text"
               value={donateTitle}
@@ -124,13 +124,13 @@ const DonationDonate = () => {
               placeholder="Note (Optional)"
               className="p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-          </div>
           <button
             onClick={handleDonate}
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-          >
+            >
             Donate
           </button>
+            </div>
         </div>
 
         <DonatedHistoryTable

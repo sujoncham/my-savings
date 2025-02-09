@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,22 +16,39 @@ const Header = () => {
   };
 
   const menu = [
-    <Link key="home" to="/" className="block hover:text-gray-200">
+    
+    
+    <NavLink key="home" to="/" className={({ isActive }) =>
+      `block px-4 py-2 rounded ${isActive ?
+        "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`}>
       Home
-    </Link>,
-    <Link key="loan" to="/loan" className="block hover:text-gray-200">
+    </NavLink>,
+    <NavLink key="loan" to="/loan" className={({ isActive }) =>
+      `block px-4 py-2 rounded ${isActive ?
+        "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`}>
       Loan
-    </Link>,
-    <Link key="personList" to="/personList" className="block hover:text-gray-200">
+    </NavLink>,
+    <NavLink key="personList" to="/personList" className={({ isActive }) =>
+      `block px-4 py-2 rounded ${isActive ?
+        "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`}>
       Members List
-    </Link>,
-    <Link key="expense" to="/expense" className="block hover:text-gray-200">
+    </NavLink>,
+    <NavLink key="expense" to="/expense" className={({ isActive }) =>
+      `block px-4 py-2 rounded ${isActive ?
+        "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`}>
       Expense
-    </Link>,
-    <Link key="dashboard" to="/dashboard" className="block hover:text-gray-200">
+    </NavLink>,
+    <NavLink key="blogs" to="/blogs" className={({ isActive }) =>
+      `block px-4 py-2 rounded ${isActive ?
+        "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`}>
+      Blogs
+    </NavLink>,
+    <NavLink key="dashboard" to="/dashboard" className={({ isActive }) =>
+      `block px-4 py-2 rounded ${isActive ?
+        "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`}>
       Dashboard
-    </Link>,
-   
+    </NavLink>,
+    
     
   ];
 
@@ -62,20 +79,7 @@ const Header = () => {
           className="md:hidden focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {/* <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-            ></path>
-          </svg> */}
+         
           {isMenuOpen ? <span className="fas fa-times">yes</span> : <span className="fas fa-bars">no</span>}
         </button>
       </div>

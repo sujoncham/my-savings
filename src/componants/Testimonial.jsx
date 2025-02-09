@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const Testimonial = () => {
   const [testimonials, setTestimonials] = useState([]);
-  console.log(testimonials);
+  // console.log(testimonials);
   useEffect(() => { 
     const fetchTestimonials = async () => {
       try {

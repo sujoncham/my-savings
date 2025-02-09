@@ -21,10 +21,11 @@ export const updateLoan = createAsyncThunk(
 // Update savings
 export const editLoans = createAsyncThunk(
   "loans/editLoans",
-  async ({ id, totalLoan, name }) => {
+  async ({ id, totalLoan, name, note }) => {
     const response = await axios.put(`${API_URL}/${id}/edit-loans`, {
       totalLoan,
       name,
+      note,
     });
     return response.data;
   }
@@ -50,6 +51,15 @@ export const fetchLoans = createAsyncThunk("loans/fetchLoans", async () => {
   const response = await axios.get(`${API_URL}`);
   return response.data;
 });
+
+// Update Loan Status
+export const updateLoanStatus = createAsyncThunk(
+  "loans/updateLoanStatus",
+  async (id) => {
+    const response = await axios.put(`/api/loans/update-status/${id}`);
+    return response.data.loan;
+  }
+);
 
 // Delete an Loan
 export const deleteLoan = createAsyncThunk(
@@ -112,6 +122,12 @@ const loanSlice = createSlice({
       .addCase(updateLoan.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(updateLoanStatus.fulfilled, (state, action) => {
+        const index = state.loans.findIndex(
+          (loan) => loan._id === action.payload._id
+        );
+        if (index !== -1) state.loans[index] = action.payload;
       });
   },
 });

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { deleteCollection, editCollection, fetchOthers } from "../redux/features/donationSlice";
 import { useDispatch } from "react-redux";
+import moment from "moment";
 
 const CollectionAmountTable = ({collectionHistory}) => {
     const [editMode, setEditMode] = useState(null); // Tracks the ID of the donation being edited
@@ -41,6 +42,7 @@ const CollectionAmountTable = ({collectionHistory}) => {
                 <th className="border px-6 py-3 text-left">Donation Title</th>
                 <th className="border px-6 py-3 text-left">Amount</th>
                 <th className="border px-6 py-3 text-left">Note</th>
+                <th className="border px-6 py-3 text-left">Date</th>
                 <th className="border px-6 py-3 text-left">Actions</th>
               </tr>
             </thead>
@@ -88,6 +90,9 @@ const CollectionAmountTable = ({collectionHistory}) => {
                     ) : (
                       donation.note
                     )}
+                  </td>
+                  <td className="border px-6 py-3 text-green-600 font-bold">
+                     {moment(donation.date).fromNow()} ({moment(donation.date).format("ll")})
                   </td>
                   <td className="border px-6 py-3">
                     {editMode === donation._id ? (
