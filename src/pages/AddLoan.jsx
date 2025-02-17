@@ -1,6 +1,17 @@
 
 
-const AddLoan = ({ handleAddLoan,setName,loanAmount,setLoanAmount,closeModal, name, setReferName, referName, setRecieveDate, recieveDate}) => {
+const AddLoan = ({
+  handleAddLoan,
+  setName,
+  loanAmount,
+  setLoanAmount,
+  closeModal,
+  name,
+  setReferName,
+  referName,
+  setRecieveDate,
+  recieveDate
+}) => {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white p-5 rounded-md shadow-lg w-80">

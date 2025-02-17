@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Signup from "../pages/Signup";
+import { useSelector } from "react-redux";
 
 const User = () => {
   const [users, setUsers] = useState([]);
@@ -8,11 +9,13 @@ const User = () => {
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [editedName, setEditedName] = useState("");
+  const [editRole, setEditRole] = useState("");
+  const role = useSelector((state) => state.auth.role); // Get user role
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("https://amar-savings-loan.onrender.com/api/users");
+        const response = await axios.get("http://localhost:5000/api/users");
         setUsers(response.data);
       } catch (err) {
         console.error(err.message);
@@ -24,6 +27,7 @@ const User = () => {
   const handleEditClick = (user) => {
     setSelectedUser(user);
     setEditedName(user.name);
+    setEditRole(user.editRole);
     setIsModalOpen(true);
   };
 
@@ -31,7 +35,7 @@ const User = () => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             const getData = async () => {
                 await axios
-                    .delete(`https://amar-savings-loan.onrender.com/api/users/${id}`)
+                    .delete(`http://localhost:5000/api/users/${id}`)
                     .then(() => {
                         console.log("deleted");
                         window.location.reload()
@@ -48,11 +52,11 @@ const User = () => {
 
   const handleModalSave = async () => {
     try {
-        const updatedUser = { name: editedName }; // Only send updated fields
-        const response = await axios.put(`https://amar-savings-loan.onrender.com/api/users/${selectedUser._id}`, updatedUser);
+        const updatedUser = { name: editedName, role:editRole }; 
+        const response = await axios.put(`http://localhost:5000/api/users/${selectedUser._id}`, updatedUser);
         if (response.status === 200) {
             // Update the state with the new data
-            setUsers(users.map((user) => (user._id === selectedUser._id ? { ...user, name: editedName } : user)));
+            setUsers(users.map((user) => (user._id === selectedUser._id ? { ...user, name: editedName, role:editRole } : user)));
             setIsModalOpen(false);
             setSelectedUser(null);
         } else {
@@ -82,6 +86,7 @@ const User = () => {
             <th className="py-3 px-6 text-left">ID</th>
             <th className="py-3 px-6 text-left">Name</th>
             <th className="py-3 px-6 text-left">UserId</th>
+            {role === "admin" && (<th className="py-3 px-6 text-left">Role</th>)}
             <th className="py-3 px-6 text-left">Actions</th>
           </tr>
         </thead>
@@ -91,7 +96,9 @@ const User = () => {
               <td className="py-3 px-6">{index + 1}</td>
               <td className="py-3 px-6">{user.name}</td>
               <td className="py-3 px-6">{user.userId}</td>
+              {role === "admin" && (<td className="py-3 px-6">{user.role}</td>)}
               <td className="py-3 px-6">
+              {role === "admin" ? <span>
                 <button
                   onClick={() => handleEditClick(user)}
                   className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mr-2"
@@ -103,7 +110,7 @@ const User = () => {
                   className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                 >
                   Del
-                </button>
+                </button></span>: "Member"}
               </td>
             </tr>
           ))}
@@ -120,6 +127,16 @@ const User = () => {
               value={editedName}
               onChange={(e) => setEditedName(e.target.value)}
               className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <option value="">
+              <select name="" id=""></select>
+            </option>
+            <input
+              type="text"
+              value={editRole}
+              onChange={(e) => setEditRole(e.target.value)}
+              placeholder="Role"
+              className="w-full px-4 py-2 mt-5 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <div className="mt-4 flex justify-end">
               <button

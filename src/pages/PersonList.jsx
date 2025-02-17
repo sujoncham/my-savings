@@ -22,7 +22,7 @@ const PersonList = () => {
     e.preventDefault()
     const person = {name}
     
-       await axios.post(`https://amar-savings-loan.onrender.com/api/persons/addOwner`, person)
+       await axios.post(`http://localhost:5000/api/persons/addOwner`, person)
         .then((data)=>{
             console.log('Post created successfully', data);
           // console.log(data);

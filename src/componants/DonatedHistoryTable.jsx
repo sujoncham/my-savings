@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { deleteDonated, editDonated, fetchOthers } from "../redux/features/donationSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const DonatedHistoryTable = ({ donationHistory }) => {
@@ -8,7 +8,8 @@ const DonatedHistoryTable = ({ donationHistory }) => {
     const [editTitle, setEditTitle] = useState("");
     const [editAmount, setEditAmount] = useState("");
     const [editNote, setEditNote] = useState("");
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const role = useSelector((state) => state.auth.role); // Get user role
     
   const handleEditClick = (donation) => {
     setEditMode(donation._id);
@@ -40,7 +41,7 @@ const DonatedHistoryTable = ({ donationHistory }) => {
             <thead>
               <tr className="bg-blue-500 text-white">
                 <th className="border px-6 py-3 text-left">#</th>
-                <th className="border px-6 py-3 text-left">Donation Title</th>
+                <th className="border px-6 py-3 text-left">Donated Title</th>
                 <th className="border px-6 py-3 text-left">Amount</th>
                 <th className="border px-6 py-3 text-left">Note</th>
                 <th className="border px-6 py-3 text-left">Actions</th>
@@ -100,8 +101,8 @@ const DonatedHistoryTable = ({ donationHistory }) => {
                         Save
                       </button>
                     ) : (
-                      <>
-                        <button
+                      <div>
+                        {role === "admin" ? <><button
                           onClick={() => handleEditClick(donation)}
                           className="bg-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-400 mr-2"
                         >
@@ -112,8 +113,8 @@ const DonatedHistoryTable = ({ donationHistory }) => {
                           className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                         >
                           Delete
-                        </button>
-                      </>
+                        </button></> :"Yeah"}
+                      </div>
                     )}
                   </td>
                 </tr>

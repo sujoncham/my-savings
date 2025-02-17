@@ -1,14 +1,14 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
-
-
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const role = useSelector((state) => state.auth.role); // Get user role
+
 
   return (
     <div className="flex flex-col lg:flex-row h-screen">
-      {/* Sidebar (Mobile + Desktop) */}
       {isSidebarOpen && (
         <div
           onClick={() => setIsSidebarOpen(false)}
@@ -32,144 +32,194 @@ const Dashboard = () => {
         <nav className="flex-grow overflow-y-auto">
           <ul className="space-y-2 p-4">
             {/* Links */}
-            <li>
-              <NavLink 
-                to="savingsEdit"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Savings Edit
-              </NavLink >
-            </li>
-            <li>
-              <NavLink 
-                to="loanEdit"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                loan Edit
-              </NavLink >
-            </li>
-            <li>
-              <NavLink 
-                to="allMessages"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                All messages
-              </NavLink >
-            </li>
-            
-            <li>
-              <NavLink 
-                to="addTestimonial"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Add Testimonial
-              </NavLink >
-            </li>
-            
-            <li>
-              <NavLink 
-                to="addBlog"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Add Blog
-              </NavLink >
-            </li>
-            <li>
-              <NavLink 
-                to="blogEdit"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Blog Edit
-              </NavLink >
-            </li>
-           
-            <li>
-              <NavLink 
-                to="users"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Users
-              </NavLink >
-            </li>
-            <li>
-              <NavLink 
-                to="donation"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Donation & Donate
-              </NavLink >
-            </li>
-          
-            <li>
-              <NavLink 
-                to="addExpense"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                AddExpense
-              </NavLink >
-            </li>
-            <li>
-              <NavLink 
-                to="expenseEdit"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Expense Edit
-              </NavLink >
-            </li>
-            <li>
-              <NavLink 
-                to="settings"
-                className={({ isActive }) =>
-                  `block px-4 py-2 rounded ${isActive ?
-                    "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`
-}
-                onClick={() => setIsSidebarOpen(false)}
-              >
-                Settings
-              </NavLink >
-            </li>
+            {role === "admin" && (
+              <li>
+                <NavLink
+                  to="savingsEdit"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Savings Edit
+                </NavLink>
+              </li>
+            )}
+            {role === "admin" && (
+              <li>
+                <NavLink
+                  to="loanEdit"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Loan Edit
+                </NavLink>
+              </li>
+            )}
+           {(role === "admin" || role === "user") && (
+              <li>
+                <NavLink
+                  to="allMessages"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  All Messages
+                </NavLink>
+              </li>
+            )}
+            {(role === "admin" || role === "user") && (
+              <li>
+                <NavLink
+                  to="addTestimonial"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Add Testimonial
+                </NavLink>
+              </li>
+            )}
+            {(role === "admin" || role === "user") && (
+              <li>
+                <NavLink
+                  to="addBlog"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Add Blog
+                </NavLink>
+              </li>
+            )}
+            {role === "admin" && (
+              <li>
+                <NavLink
+                  to="blogEdit"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Blog Edit
+                </NavLink>
+              </li>
+            )}
+            {(role === "admin" || role === "user") && (
+              <li>
+                <NavLink
+                  to="users"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Users
+                </NavLink>
+              </li>
+            )}
+            {(role === "admin" || role === "user") && (
+              <li>
+                <NavLink
+                  to="donation"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Donation & Donate
+                </NavLink>
+              </li>
+            )}
+            {(role === "admin" || role === "user") && (
+              <li>
+                <NavLink
+                  to="addExpense"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Add Expense
+                </NavLink>
+              </li>
+            )}
+            {role === "admin" && (
+              <li>
+                <NavLink
+                  to="expenseEdit"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Expense Edit
+                </NavLink>
+              </li>
+            )}
+            {(role === "admin" || role === "user") && (
+              <li>
+                <NavLink
+                  to="settings"
+                  className={({ isActive }) =>
+                    `block px-4 py-2 rounded ${
+                      isActive
+                        ? "bg-gray-700 font-bold border-l-4 border-white"
+                        : "hover:bg-gray-700"
+                    }`
+                  }
+                  onClick={() => setIsSidebarOpen(false)}
+                >
+                  Settings
+                </NavLink>
+              </li>
+            )}
           </ul>
-          
         </nav>
       </aside>
 
@@ -181,9 +231,7 @@ const Dashboard = () => {
           className="lg:hidden bg-gray-800 text-white p-2 rounded-full fixed top-4 left-4 z-50"
         >
           ☰
-          
         </button>
-        
 
         {/* Outlet renders child routes */}
         <Outlet />
@@ -193,6 +241,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-
-

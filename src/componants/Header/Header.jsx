@@ -16,8 +16,6 @@ const Header = () => {
   };
 
   const menu = [
-    
-    
     <NavLink key="home" to="/" className={({ isActive }) =>
       `block px-4 py-2 rounded ${isActive ?
         "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`}>
@@ -48,9 +46,19 @@ const Header = () => {
         "bg-gray-700 font-bold border-l-4 border-white" : "hover:bg-gray-700"}`}>
       Dashboard
     </NavLink>,
-    
-    
   ];
+
+  const handleLoginLogout = () => { 
+    if(isAuthenticated){
+      return <button onClick={handleLogout} className="block hover:text-gray-200 bg-blue-700 px-4 py-2 rounded">
+      Logout
+    </button>
+    }else{
+      return <Link key="signin" to="/signin" className="block hover:text-gray-200 bg-blue-700 px-4 py-2 rounded">
+      Login
+    </Link>
+    } 
+  }
 
   return (
     <header className="bg-blue-500 text-white sticky z-50 top-0">
@@ -62,16 +70,8 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex space-x-6">{menu}</nav>
-        <div>
-        {!isAuthenticated ? (<div className="flex space-x-4">
-        <Link key="signin" to="/signin" className="block hover:text-gray-200 bg-blue-700 px-4 py-2 rounded">
-          Login
-        </Link>
-        
-            </div> ):
-          <button onClick={handleLogout} className="block hover:text-gray-200 bg-blue-700 px-4 py-2 rounded">
-          Logout
-        </button>}
+        <div className="hidden md:flex space-x-6">
+        {handleLoginLogout()}
         </div>
 
         {/* Mobile Menu Button */}
@@ -80,7 +80,7 @@ const Header = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
          
-          {isMenuOpen ? <span className="fas fa-times">yes</span> : <span className="fas fa-bars">no</span>}
+          {isMenuOpen ? <span className="fas fa-times">X</span> : <span className="fas fa-bars">=</span>}
         </button>
       </div>
 
@@ -88,6 +88,7 @@ const Header = () => {
       {isMenuOpen && (
         <nav className="md:hidden bg-blue-600 text-white space-y-4 px-4 py-2">
           {menu}
+          {handleLoginLogout()}
         </nav>
       )}
     </header>

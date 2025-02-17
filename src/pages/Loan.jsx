@@ -58,6 +58,7 @@ const Loan = () => {
     setCurrentLoan(null);
     setName("");
     setLoanAmount("");
+    setReferName(""); 
     setIsModalOpen(false);
     setLoanModalOpen(false)
     setHistoryModalOpen(false);
@@ -89,7 +90,7 @@ const Loan = () => {
       alert("Please fill in all fields.");
       return;
     }
-    const newLoan = { name, totalLoan: Number(loanAmount) };
+    const newLoan = { name, referName, totalLoan: Number(loanAmount) };
     await dispatch(addLoan(newLoan));
     closeModal();
     dispatch(fetchLoans()); // Refresh the loan list after adding a new loan
@@ -142,9 +143,9 @@ const Loan = () => {
               <div className="flex justify-between items-center mb-5 text-white">
                 <h2 className="text-4xl font-semibold">{loan.name}</h2>
                 
-                <p>{loan.status ? `Status: ${loan.status}` : "No notes available"}</p>
+                <div className="flex items-center gap-1"><p className="text-black">Status : </p> <p>{loan.status ? `${loan.status}` : "No notes available"}</p></div>
 
-                <p>{loan.note ? `Note: ${loan.note}` : "No notes available"}</p>
+                <div className="flex items-center gap-1"><p className="text-black">Note : </p> <p>{loan.note ? `${loan.note}` : "No notes available"}</p></div>
               </div>
               <hr className="mb-5"/>
                 <div className="flex justify-between items-center ">

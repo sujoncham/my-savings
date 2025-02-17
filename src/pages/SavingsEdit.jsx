@@ -44,7 +44,7 @@ const SavingsEdit = () => {
 
   const handleDelete = async (id) => {
     try {
-        await axios.delete(`https://amar-savings-loan.onrender.com/api/persons/${id}`);
+        await axios.delete(`http://localhost:5000/api/persons/${id}`);
   
     } catch (error) {
         console.error("There was an error deleting the expense!", error);

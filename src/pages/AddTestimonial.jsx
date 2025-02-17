@@ -17,7 +17,7 @@ const AddTestimonial = () => {
             formData.append("role", role);
             formData.append("image", image);
 
-            const response = await axios.post("https://amar-savings-loan.onrender.com/api/testimonials/addTestimonial", formData, {
+            const response = await axios.post("http://localhost:5000/api/testimonials/addTestimonial", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

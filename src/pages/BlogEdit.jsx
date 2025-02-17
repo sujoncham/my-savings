@@ -11,7 +11,7 @@ const BlogEdit = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("https://amar-savings-loan.onrender.com/api/blogs");
+        const response = await axios.get("http://localhost:5000/api/blogs");
         setBlogs(response.data.data);
       } catch (error) {
         console.error("There was an error!", error);
@@ -37,7 +37,7 @@ const BlogEdit = () => {
   // Handle edit submission
   const handleEdit = async () => {
     try {
-      const response = await axios.put(`https://amar-savings-loan.onrender.com/api/blogs/${selectedBlog._id}`, updatedBlog);
+      const response = await axios.put(`http://localhost:5000/api/blogs/${selectedBlog._id}`, updatedBlog);
       const updatedBlogs = blogs.map((blog) =>
         blog._id === response.data._id ? response.data : blog
       );
@@ -51,7 +51,7 @@ const BlogEdit = () => {
   // Handle delete operation
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://amar-savings-loan.onrender.com/api/blogs/${id}`);
+      await axios.delete(`http://localhost:5000/api/blogs/${id}`);
       const filteredBlogs = blogs.filter((blog) => blog._id !== id);
       setBlogs(filteredBlogs);
     } catch (error) {

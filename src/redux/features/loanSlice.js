@@ -21,11 +21,12 @@ export const updateLoan = createAsyncThunk(
 // Update savings
 export const editLoans = createAsyncThunk(
   "loans/editLoans",
-  async ({ id, totalLoan, name, note }) => {
+  async ({ id, totalLoan, name, note, referName }) => {
     const response = await axios.put(`${API_URL}/${id}/edit-loans`, {
       totalLoan,
       name,
       note,
+      referName,
     });
     return response.data;
   }

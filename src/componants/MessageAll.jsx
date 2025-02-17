@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 const MessageAll = () => {
     const [messages, setMessages] = useState([]);
     const [selectedMessage, setSelectedMessage] = useState(null); // State for selected message
     const [isModalOpen, setIsModalOpen] = useState(false); // Modal visibility state
+    const role = useSelector((state) => state.auth.role); // Get user role
 
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const response = await axios.get("https://amar-savings-loan.onrender.com/api/message");
+                const response = await axios.get("http://localhost:5000/api/message");
                 setMessages(response.data);
             } catch (error) {
                 console.error("Error fetching messages:", error);
@@ -22,7 +24,7 @@ const MessageAll = () => {
 
     const handleRead = async (id) => {
         try {
-            await axios.put(`https://amar-savings-loan.onrender.com/api/message/${id}`, { status: "read" });
+            await axios.put(`http://localhost:5000/api/message/${id}`, { status: "read" });
             setMessages(
                 messages.map((message) =>
                     message._id === id ? { ...message, status: "read" } : message
@@ -50,7 +52,7 @@ const MessageAll = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`https://amar-savings-loan.onrender.com/api/message/${id}`);
+            await axios.delete(`http://localhost:5000/api/message/${id}`);
         } catch (error) {
             console.error("There was an error deleting the expense!", error);
         }
@@ -92,23 +94,29 @@ const MessageAll = () => {
                                         {message.status}
                                     </span>
                                 </td>
-                                <td className="py-4 px-6 border-b border-gray-200">
+                                <td className="py-4 px-8 border-b border-gray-200">
                                     {message.status !== "read" ? (
                                         <button
-                                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                                            className="bg-blue-500 text-white p-1 rounded hover:bg-blue-600 transition"
                                             onClick={() => openModal(message)}
                                         >
-                                            Mark as Read
+                                            Read here
                                         </button>
                                     ) : (
                                         <div className="flex items-center space-x-2">
                                             
-                                            <button
-                                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                                           {role === "admin" ? ( <button
+                                                className="bg-red-500 text-white p-1 rounded hover:bg-red-600 transition"
                                                 onClick={() => handleDelete(message._id)}
                                             >
                                                 Delete
-                                            </button>
+                                                </button>)
+                                                :
+                                                (<button
+                                                className="bg-red-500 text-white p-1 rounded hover:bg-red-600 transition"
+                                                
+                                            >Done</button>) }
+                                    
                                         </div>
                                     )}
                                 </td>

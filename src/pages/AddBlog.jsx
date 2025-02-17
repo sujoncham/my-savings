@@ -14,7 +14,7 @@ const AddBlog = () => {
             formData.append("content", content);
             formData.append("image", image[0]);
 
-            const response = await axios.post("https://amar-savings-loan.onrender.com/api/blogs/addBlog", formData, {
+            const response = await axios.post("http://localhost:5000/api/blogs/addBlog", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },

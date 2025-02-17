@@ -13,6 +13,7 @@ const LoanEdit = () => {
   const [newLoans, setNewLoan] = useState("");
   const [loanerName, setLoanerName] = useState("");
   const [loanNote, setLoanNote] = useState("");
+  const [referName, setReferName] = useState("");
 
    useEffect(() => {
       dispatch(fetchLoans());
@@ -24,6 +25,7 @@ const LoanEdit = () => {
     setNewLoan(loan.totalLoan);
     setLoanerName(loan.name);
     setLoanNote(loan.note);
+    setReferName(loan.referName);
     setIsModalOpen(true);
   };
 
@@ -35,7 +37,7 @@ const LoanEdit = () => {
 
   const handleSave =async () => {
     if (currentLoan && newLoans) {
-        await dispatch(editLoans({ id: currentLoan._id, name:loanerName, note:loanNote, totalLoan: parseInt(newLoans) }));
+        await dispatch(editLoans({ id: currentLoan._id, name:loanerName, note:loanNote, referName:referName, totalLoan: parseInt(newLoans) }));
         dispatch(fetchLoans());
       closeModal();
     }
@@ -48,7 +50,7 @@ const LoanEdit = () => {
       const handleDelete = (id) => {
         dispatch(deleteLoan(id));
         const updatedLoans = loans.filter((loan) => loan._id !== id);
-  dispatch({ type: 'loans/setLoans', payload: updatedLoans });
+        dispatch({ type: 'loans/setLoans', payload: updatedLoans });
       };
 
   const handleStatusChange = async (id) => {
@@ -116,6 +118,13 @@ const LoanEdit = () => {
               value={loanNote}
               onChange={(e) => setLoanNote(e.target.value)}
               placeholder="Enter note"
+              className="w-full p-2 border border-gray-300 rounded mb-3"
+            />
+            <input
+              type="text"
+              value={referName}
+              onChange={(e) => setReferName(e.target.value)}
+              placeholder="refer name"
               className="w-full p-2 border border-gray-300 rounded mb-3"
             />
             <div className="flex justify-between items-center gap-2 mb-5">

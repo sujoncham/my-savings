@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Base API URL
-const API_URL = "https://amar-savings-loan.onrender.com/api/expenses";
+const API_URL = "http://localhost:5000/api/expenses";
 
 // Async Thunks
 
