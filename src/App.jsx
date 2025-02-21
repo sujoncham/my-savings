@@ -26,6 +26,7 @@ import Settings from "./pages/Settings";
 import AddExpense from "./pages/AddExpense";
 import DonationDonate from "./pages/DonationDonate";
 import Blog from "./componants/Blog";
+import OurInfo from "./pages/OurInfo";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/expense" element={<ProtectedRoute><Expenses /></ProtectedRoute>} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/ourInfo" element={<OurInfo />} />
         <Route path="/blogs" element={<Blog />} />
         <Route path="/blogs/:id" element={<ProtectedRoute><BlogDetails /></ProtectedRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} >

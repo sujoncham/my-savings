@@ -73,11 +73,13 @@ const LoanEdit = () => {
             <div className=''>
             <h2 className="text-lg font-semibold">{loan.name}</h2>
               <p>Total Loan: {loan.totalLoan} Taka</p>
+              <p>MemberId: {loan.memberId ? loan.memberId : loan.nonMemberId}</p>
+              <p>Status: {loan.status}</p>
             </div>
-            <div>
+            <div className='flex gap-2'>
             <button
               onClick={() => openModal(loan)}
-              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-3"
+              className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
             >
               Edit loan
               </button>

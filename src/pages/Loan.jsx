@@ -19,6 +19,8 @@ const Loan = () => {
   const [referName, setReferName] = useState("");
   const [recieveDate, setRecieveDate] = useState("");
 
+  const [searchTerm, setSearchTerm] = useState(""); // Search input state
+
 
   const { loans, loading, error } = useSelector((state) => state.loans);
   const { persons} = useSelector((state) => state.persons);
@@ -40,6 +42,16 @@ const Loan = () => {
     dispatch(fetchLoans());
     dispatch(fetchPersons());
   }, [dispatch]);
+
+  // Filter loans based on search term (by name, memberId, or nonMemberId)
+  const filteredLoans = loans.filter((loan) => {
+    const lowerSearch = searchTerm.toLowerCase();
+    return (
+      loan.name.toLowerCase().includes(lowerSearch) ||
+      (loan.memberId && loan.memberId.toLowerCase().includes(lowerSearch)) ||
+      (loan.nonMemberId && loan.nonMemberId.toLowerCase().includes(lowerSearch))
+    );
+  });
 
   const openModal = (loan) => {
     setCurrentLoan(loan);
@@ -131,61 +143,65 @@ const Loan = () => {
       <hr className="m-10"/>
       {/* Add Loan Button */}
       
+       {/* 🔍 Search Field */}
+       <div className="flex justify-center my-5">
+        <input
+          type="text"
+          name="search"
+          placeholder="Search by name, member ID, or non-member ID..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full md:w-1/2 p-3 border border-gray-400 rounded"
+        />
+      </div>
+
+      <hr className="m-10" />
+
+      {/* Loan List */}
       <div className="mb-10">
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
-        {loans.length ? loans?.map((loan) => (
-          <div
-            key={loan._id}
-            className="mb-10 border-2 border-blue-500 p-5 rounded bg-green-800"
-          >
-           
-            <div>
+        {filteredLoans.length ? (
+          filteredLoans.map((loan) => (
+            <div key={loan._id} className="mb-10 border-2 border-blue-500 p-5 rounded bg-green-800">
               <div className="flex justify-between items-center mb-5 text-white">
                 <h2 className="text-4xl font-semibold">{loan.name}</h2>
-                
-                <div className="flex items-center gap-1"><p className="text-black">Status : </p> <p>{loan.status ? `${loan.status}` : "No notes available"}</p></div>
-
-                <div className="flex items-center gap-1"><p className="text-black">Note : </p> <p>{loan.note ? `${loan.note}` : "No notes available"}</p></div>
+                <p>Status: {loan.status ? loan.status : "No status available"}</p>
+                <p>Member ID: {loan.memberId ? loan.memberId : loan.nonMemberId}</p>
+                <p>Note: {loan.note ? loan.note : "No notes available"}</p>
               </div>
-              <hr className="mb-5"/>
-                <div className="flex justify-between items-center ">
-                  <div>
+
+              <hr className="mb-5" />
+
+              <div className="flex justify-between items-center">
+                <div>
                   <p>Total Loan: {loan.totalLoan} Taka</p>
                   <p>Total Interest: {loan.totalInterest} Taka</p>
-                  </div>
-                  <div> <p>Remaining Loan: {loan.remainingLoan} Taka</p>
-                    <p>Remaining Interest: {loan.remainingInterest} Taka</p>
-                  </div>
-                  <div>
-                  <p>Loan Recieved: {moment(loan.createdAt).format("ll")}</p>
-                  </div>
-                  <div>
-                  <p>Loan Refer: {loan.referName}</p>
-                  </div>
-                  <div>
-                  <button
-                      onClick={() => openModal(loan)}
-                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 mt-3"
-                    >
-                      Deduct Payment
-                    </button>
-                    <button
-                      onClick={() => openHistoryModal(loan)}
-                      className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 mt-3"
-                    >
-                      Show History
-                    </button>
-                  </div>
                 </div>
+                <div>
+                  <p>Remaining Loan: {loan.remainingLoan ?? "N/A"} Taka</p>
+                  <p>Remaining Interest: {loan.remainingInterest ?? "N/A"} Taka</p>
+                </div>
+                <p>Loan Received: {loan.recieveDate ? moment(loan.recieveDate).format("ll") : "Date Not Available"}</p>
+                <p>Loan Refer: {loan.referName}</p>
+
+                <div className="flex flex-col gap-2">
+                  <button onClick={() => openModal(loan)} className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                    Deduct Payment
+                  </button>
+                  <button onClick={() => openHistoryModal(loan)} className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
+                    Show History
+                  </button>
+                </div>
+              </div>
             </div>
-            
+          ))
+        ) : (
+          <div className="bg-red-100 text-red-700 p-4 shadow-md rounded-md border border-red-300 text-center text-xl font-semibold">
+            🚫 No Loans Found!
           </div>
-        )) : (<div
-        className="bg-white p-4 shadow-md rounded-md border border-gray-200"
-        > <h1>No Loans Found</h1>
-        </div>)}
+        )}
       </div>
-      </div>
+    
+  
 
       {loanModalOpen && (
         <AddLoan
@@ -259,4 +275,4 @@ const Loan = () => {
   );
 };
 
-export default Loan;
+export default Loan; 

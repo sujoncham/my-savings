@@ -8,9 +8,20 @@ const Blog = () => {
   const { paginatedBlogs, totalPages, loading, error } = useSelector((state) => state.blogs);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [searchTerm, setSearchTerm] = useState(""); // Search input state
+
   useEffect(() => {
     dispatch(fetchBlogs({ page: currentPage, type: "blog" }));
   }, [dispatch, currentPage]);
+
+   // Filter loans based on search term (by name, memberId, or nonMemberId)
+  const filteredBlogs = paginatedBlogs.filter((blog) => {
+    const lowerSearch = searchTerm.toLowerCase();
+    return (
+      blog.name?.toLowerCase().includes(lowerSearch) ||
+      (blog.content?.toLowerCase().includes(lowerSearch)) 
+    );
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -19,8 +30,20 @@ const Blog = () => {
     <section id="blog" className="bg-gray-100 py-16">
       <div className="container mx-auto">
         <h2 className="text-2xl font-bold text-center mb-8">All Blogs</h2>
+        {/* 🔍 Search Field */}
+       <div className="flex justify-center my-5">
+        <input
+            type="text"
+            name="search"
+          placeholder="Search by name, member ID, or non-member ID..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full md:w-1/2 p-3 border border-gray-400 rounded"
+        />
+      </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {paginatedBlogs.map((blog) => (
+        {filteredBlogs.length ? (
+          filteredBlogs.map((blog) => (
             <div key={blog._id} className="p-6 bg-white rounded shadow">
               <h3 className="text-lg font-semibold mb-2">{blog.title}</h3>
               <p className="text-sm">{blog.content.slice(0, 120)} ...</p>
@@ -29,7 +52,12 @@ const Blog = () => {
                 Read More
               </Link>
             </div>
-          ))}
+          ))
+        ) : (
+          <div className="bg-red-100 text-red-700 p-4 shadow-md rounded-md border border-red-300 text-center text-xl font-semibold">
+            🚫 No Loans Found!
+          </div>
+        )}
         </div>
 
         {/* Pagination Controls */}
